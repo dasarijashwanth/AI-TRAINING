@@ -9,62 +9,234 @@
 <body>
 <div class="layout">
 <aside class="sidebar">
-  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
-  <div class="tagline">by Jashwanth Dasari</div>
-  <nav>
-    <a href="/AI-TRAINING/">Home</a>
-    <div class="section">Learn</div>
-    <a href="/AI-TRAINING/topics/concepts.html" class="active">1. AI Concepts</a>
-    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
-    <a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
-    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
-    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
-    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
-    <div class="section">Reference</div>
-    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
-    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
-    <a href="/AI-TRAINING/topics/about.html">9. About</a>
-  </nav>
+<div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+<div class="tagline">by Jashwanth Dasari</div>
+<nav>
+<a href="/AI-TRAINING/">Home</a>
+<div class="section">Learn</div>
+<a href="/AI-TRAINING/topics/concepts.html" class="active">1. AI Concepts</a>
+<a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+<a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
+<a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+<a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+<a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+<div class="section">Reference</div>
+<a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+<a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+<a href="/AI-TRAINING/topics/topic-map.html">9. Topic Map</a>
+<a href="/AI-TRAINING/topics/competency-map.html">10. Competency Map</a>
+<a href="/AI-TRAINING/topics/about.html">11. About</a>
+</nav>
 </aside>
 <main class="content">
 <h1>AI Concepts</h1>
-<p>Before you use AI well, it helps to know what is happening under the hood. Not the math. The mental model. This page gives you five ideas that explain almost everything AI tools do.</p>
+<p>Before you use AI agents, build AI agents, or customize anything, you need to understand how the models underneath actually work. This page is the foundation. Read it in order, one lesson at a time, and try each example yourself. By the end you will understand what a language model is doing when it answers you, why it sometimes makes things up, why it costs money per token, and how all of that shapes the way good AI agents are built.</p>
+<p>On this page:</p>
+<ul>
+<li><a href="#how-a-language-model-works">How a language model works</a></li>
+<li><a href="#what-the-model-can-see">What the model can see</a></li>
+<li><a href="#instruction-context-and-format">Instruction, context and format</a></li>
+<li><a href="#show-one-example">Show one example</a></li>
+<li><a href="#output-the-next-step-can-use">Output the next step can use</a></li>
+<li><a href="#the-prompt-before-the-conversation">The prompt before the conversation</a></li>
+<li><a href="#change-the-prompt-before-you-retry">Change the prompt before you retry</a></li>
+<li><a href="#where-a-model-makes-things-up">Where a model makes things up</a></li>
+<li><a href="#same-prompt-different-answer">Same prompt, different answer</a></li>
+<li><a href="#getting-a-straight-answer">Getting a straight answer</a></li>
+<li><a href="#wrong-about-the-world-or-wrong-about-the-text">Wrong about the world, or wrong about the text</a></li>
+<li><a href="#what-every-token-costs">What every token costs</a></li>
+<li><a href="#watch-a-tiny-agent-work">Watch a tiny agent work</a></li>
+<li><a href="#one-prompt-many-requests">One prompt, many requests</a></li>
+<li><a href="#assistant-or-agent">Assistant or agent?</a></li>
+<li><a href="#who-decides-the-next-step">Who decides the next step</a></li>
+<li><a href="#reading-the-token-counts">Reading the token counts</a></li>
+<li><a href="#caching-and-effort">Caching and effort</a></li>
+<li><a href="#answers-from-documents-the-model-never-saw">Answers from documents the model never saw</a></li>
+<li><a href="#where-memory-comes-from">Where memory comes from</a></li>
+</ul>
 
-<h2>What an LLM actually is</h2>
-<p>A large language model is a prediction machine. Given some text, it predicts the most likely next piece of text, one piece at a time. Everything that looks like reasoning, coding, or creativity comes from that one simple loop repeated thousands of times. It does not look up facts in a database. It does not run code in its head. It predicts.</p>
-<p>Why this matters: when the model is wrong, it is usually because the wrong continuation was statistically likely, not because it "lied." That is the root of hallucinations, and understanding it changes how you prompt, verify, and deploy.</p>
-
-<h2>Tokens</h2>
-<p>Models do not read words. They read tokens, which are chunks of text. The word "unbelievable" might be three tokens: "un", "believ", "able". Short common words are often one token; rare words split into more.</p>
+<h2 id="how-a-language-model-works">How a language model works</h2>
+<p>A language model is a machine that predicts the next word. That is the whole trick, repeated thousands of times per answer. You give it text, and it looks at everything you gave it and guesses the most likely next word. Then it adds that word and guesses the next one, and so on, until the answer is complete. There is no database of answers inside it. There is only a very good sense of how language usually flows.</p>
+<p>Think of it like autocomplete on your phone, except the model was trained on a huge amount of text from the internet, books, and code, so its guesses are much smarter than your keyboard's. When you type "The capital of France is", the model strongly predicts "Paris" because in its training data, that sentence almost always continues with "Paris". It does not look anything up. It just knows the pattern.</p>
 <div class="example"><div class="label">Example</div>
-<p>Ask a model to count the letter R in "strawberry" and it may fail, because it never saw letters. It saw tokens like "straw" and "berry". If you need letter-level work, spell the word out with spaces: "s t r a w b e r r y". Now each letter is its own token and the model can count.</p>
+<p>Open any chat app and type: "The recipe starts by heating the oven to". The model will likely answer "350 degrees" or "200 degrees Celsius", because recipes overwhelmingly follow that pattern. It did not check a cookbook. It predicted the most likely continuation, the same way it writes everything.</p>
 </div>
-<p>Tokens are also the currency of AI pricing. APIs charge per million tokens, so a 2,000-token answer costs twice as much as a 1,000-token one. Shorter prompts and shorter answers are real money.</p>
+<p>This matters because it explains almost every strange behavior you will see. A model that predicts likely text can sound confident while being wrong, can be swayed by how you phrase your question, and can be pushed toward formats you ask for. Every lesson on this page grows out of this one idea: next-word prediction, at enormous scale.</p>
 
-<h2>Context windows</h2>
-<p>The context window is how much text the model can see at once: your prompt plus everything it has generated so far. Modern models handle 100,000 to 1,000,000+ tokens, which sounds huge. In practice, models pay the most attention to the start and the end of the context, and less to the middle. This is called the lost-in-the-middle effect.</p>
-<div class="tip"><div class="label">Practical rule</div>
-<p>Put the most important instruction at the very end of your prompt, right before the model starts writing. If you paste a long document, repeat the key question after it. Keep prompts as short as they can be while still complete.</p>
-</div>
-
-<h2>Temperature</h2>
-<p>Temperature controls randomness. At temperature 0, the model always picks the most likely next token: deterministic, boring, reliable. At higher temperatures (0.7 to 1.0), it samples from less likely options: more creative, more surprising, more wrong.</p>
+<h2 id="what-the-model-can-see">What the model can see</h2>
+<p>A language model can only see what you put in front of it. When you send a message, the model reads your current message plus the conversation history the app included. That is its whole world for that response. It cannot see your screen, your files, or the live internet unless a tool gives it that access. This boundary is the single most important thing to understand about working with AI.</p>
+<p>Many people assume the model knows things it cannot see. They ask "summarize the report I opened yesterday" and expect the model to know which report that was. It does not. It only knows what the app passed into the prompt. If the app attached the document, the model can read it. If nothing was attached, it will guess or make something up instead of admitting it cannot see anything.</p>
 <div class="example"><div class="label">Example</div>
-<p>Writing a product description: temperature 0.8 gives you varied, lively copy. Extracting invoice totals into JSON: temperature 0 gives you the same correct answer every time. Match the temperature to the job: creative work wants heat, factual work wants cold.</p>
+<p>Ask a fresh chat: "What did I ask you yesterday?" The model cannot answer honestly from knowledge, because yesterday's conversation was not included in this session's context. A good model will say it has no memory of it. That answer is the boundary working correctly.</p>
 </div>
+<p>Whenever an agent seems to know something surprising, something fed it that information: a document was attached, a search tool ran, a file was read. Your job, as someone using or building agents, is to manage what goes into the model's view. Everything on this page about context, instructions, and tools comes back to this boundary.</p>
 
-<h2>Embeddings</h2>
-<p>An embedding turns text into a list of numbers (a vector) that captures meaning. Similar meanings get similar numbers. This is what makes semantic search possible: you embed your documents once, embed the user's question, and find the documents with the closest numbers.</p>
+<h2 id="instruction-context-and-format">Instruction, context and format</h2>
+<p>Every prompt has three ingredients, and good results come from getting all three right. The instruction tells the model what to do. The context gives it the material to work with. The format tells it how the answer should look. Miss one, and you get a worse answer even though the model was capable of better.</p>
+<p>Consider asking a model to "write about our product launch". That is an instruction with no context and no format. Now try: "Write a 100-word LinkedIn announcement about our product launch [instruction], for a data analytics dashboard aimed at small clinics [context], in a friendly tone with one emoji at the end [format]." Same model, much better result, because you supplied all three ingredients.</p>
 <div class="example"><div class="label">Example</div>
-<p>A helpdesk search for "my card was charged twice" should find the article titled "Duplicate billing charges" even though they share no words. Keyword search fails here. Embedding search succeeds, because both sentences land near each other in vector space. This is the retrieval half of RAG, which the <a href="/AI-TRAINING/topics/building-agents.html">Building Agents</a> page uses.</p>
+<p>Ask: "Summarize this meeting transcript in three bullet points, each under 20 words." You gave an instruction (summarize), context (the transcript you paste next), and format (three bullets, under 20 words each). Then paste the transcript. Compare that result to just "summarize this". The difference is the format doing its job.</p>
 </div>
+<div class="tip"><div class="label">Tip</div>
+<p>When an answer disappoints you, check which ingredient was missing before you blame the model. Nine times out of ten, it was missing context or a clear format, not a lack of intelligence.</p>
+</div>
+<p>Agents work the same way. An agent's system prompt is mostly instruction, its retrieved files and tool outputs are context, and the output schema it must produce is format. The same three-part recipe scales from one chat message to a full agent pipeline.</p>
 
-<h2>Putting it together</h2>
-<p>Every AI product you will meet is some combination of these five ideas: a prediction model, reading and writing tokens, working inside a context window, tuned with temperature, often paired with embeddings for search. Learn these and the rest of this site will feel familiar.</p>
+<h2 id="show-one-example">Show one example</h2>
+<p>The fastest way to get a model to do something the way you want is to show it one example. This is called few-shot prompting, and even a single example changes behavior dramatically. Models are excellent at pattern matching, so instead of describing your format in words, you demonstrate it once and let the model continue the pattern.</p>
+<p>Description is fragile. If you write "use a casual tone and keep it short", every model interprets "casual" and "short" differently. But if you show one input-output pair in exactly the style you want, the model copies the rhythm, length, and tone almost automatically. Showing beats telling with language models.</p>
+<div class="example"><div class="label">Example</div>
+<p>You want meeting notes turned into action items. Instead of describing the format, write: Input: "We need the dashboard fixed by Friday, and Priya will send the client list." Output: "- Fix dashboard (due Friday) - Priya: send client list". Then paste your real notes and write "Output:". The model will follow your pattern.</p>
+</div>
+<p>Keep examples tight and exactly representative. One strong example beats three mediocre ones, because the model latches onto details you might not notice: your punctuation, your capitalization, your line breaks. Match the example to the real task as closely as you can.</p>
 
-<footer>
-<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
-</footer>
+<h2 id="output-the-next-step-can-use">Output the next step can use</h2>
+<p>When AI output feeds into another step, like a script, a spreadsheet, or another agent, the format of the answer becomes a contract. A human can tolerate a chatty answer with the key facts buried in a paragraph. A program cannot. It needs clean, predictable structure, usually JSON, tables, or strict lists, so the next step can parse it without guessing.</p>
+<p>This is where many AI workflows silently break. Someone demos a brilliant agent in a chat window, then wires it to a real system and discovers the model sometimes adds a friendly intro sentence before the JSON, which breaks the parser. The lesson: design the output for the consumer. If the consumer is a machine, demand machine-readable output and validate it.</p>
+<div class="example"><div class="label">Example</div>
+<p>You want a model to extract order details for a script. Ask for: {"order_id": "...", "items": [...], "total": 0.0} and nothing else. If the model replies "Here is the extracted data: {...}", your JSON parser chokes on the intro sentence. The fix is an explicit rule: "Output only the JSON object, no other text." Then validate the output in code before trusting it.</p>
+</div>
+<div class="tip"><div class="label">Tip</div>
+<p>Always test the output format with ugly inputs, not just clean ones. Real data has typos and missing fields, and that is where format discipline breaks down first.</p>
+</div>
+<p>Agents chain steps together constantly: one call extracts, the next call reasons, the next calls a tool. Every handoff is a place where sloppy output becomes a bug. Treat output format as engineering, not decoration.</p>
+
+<h2 id="the-prompt-before-the-conversation">The prompt before the conversation</h2>
+<p>Every AI chat has a hidden instruction written before your first message, called the system prompt. It sets the model's role, tone, and rules for the whole conversation. You never see it in most apps, but it shapes every answer. When a chatbot feels helpful, formal, or cautious, that personality mostly came from the system prompt, not from the model itself.</p>
+<p>Think of it as a briefing given to an employee before they meet a customer: "You are a support agent. Be concise. Never invent order numbers. If you do not know, say so." The model then follows that briefing across every message. Change the briefing and you change the behavior, even with the same model and the same user questions.</p>
+<div class="example"><div class="label">Example</div>
+<p>Many coding assistants have a system prompt like: "You are a senior Python developer. Answer with code first, then a one-line explanation." That is why they all answer in the same style. The style was not the model's choice. It was written by the developer who built the assistant.</p>
+</div>
+<p>When you start customizing agents, the system prompt is your first and most powerful lever. Most behavior problems people try to fix with clever user messages are better fixed by rewriting the system prompt, because it applies to every turn instead of just one.</p>
+
+<h2 id="change-the-prompt-before-you-retry">Change the prompt before you retry</h2>
+<p>When a model gives a bad answer, the instinct is to hit retry and hope for a better one. Sometimes that works, because generation has randomness. But it is a weak strategy. A much stronger move is to change the prompt first, then retry. If the first attempt failed, the same prompt will usually fail the same way, and retrying it is just rolling the same dice.</p>
+<p>Ask yourself what was missing. Was the instruction vague? Add specifics. Was the context thin? Paste the missing material. Was the format loose? Demand structure. Each change targets a cause instead of hoping luck fixes it. Two or three deliberate revisions beat twenty blind retries.</p>
+<div class="example"><div class="label">Example</div>
+<p>You ask "explain neural networks" and get a dense textbook page you cannot follow. Do not just retry. Change the prompt: "Explain neural networks as if I am a smart 15-year-old, in under 200 words, with one everyday analogy." You fixed the audience, the length, and the framing. The retry will be a different class of answer.</p>
+</div>
+<div class="tip"><div class="label">Tip</div>
+<p>Keep a small log of prompt versions when something matters. Knowing which version produced which result is how you stop going in circles.</p>
+</div>
+<p>This habit compounds. People who revise prompts deliberately build a feel for what moves the needle, and that feel is exactly the skill that separates casual users from people who get reliable results out of AI.</p>
+
+<h2 id="where-a-model-makes-things-up">Where a model makes things up</h2>
+<p>Models make things up, often called hallucinating, and it is not a bug you can fully remove. It follows directly from how they work: they predict likely text. When the model lacks the facts, it still predicts, and the most likely-sounding continuation is not always the true one. A confident, fluent, completely wrong answer is the natural failure mode of next-word prediction.</p>
+<p>Hallucinations cluster in predictable places. Ask for obscure facts, and the model fills gaps with plausible inventions. Ask for citations, and it may invent paper titles and authors that look real. Ask it to recall something it cannot see, like your private files, and it will guess instead of saying it cannot see them. Long answers drift more than short ones, because each invented sentence becomes the foundation for the next prediction.</p>
+<div class="example"><div class="label">Example</div>
+<p>Ask a model: "List three academic papers by Dr. Amelia Hartwell on supply chain AI." If no such person exists, many models will still produce three realistic-looking titles with journals and years. Every detail looks right. None of it is real. The model predicted what such a list usually looks like.</p>
+</div>
+<p>The defense is verification, not trust. Treat model output as a draft, not a source. For facts that matter, check them against a real source, give the model the source material to work from, or use tools that ground answers in retrieved documents. Skepticism is a feature of a good AI user, not a flaw.</p>
+
+<h2 id="same-prompt-different-answer">Same prompt, different answer</h2>
+<p>Run the same prompt twice and you will often get two different answers. This is normal. Language models generate text by sampling from probabilities, not by picking the single best word every time. Each run rolls the dice slightly differently, so wording, examples, and even conclusions can shift between runs.</p>
+<p>That randomness is a knob called temperature. High temperature means more creative, varied, surprising output. Low temperature means more predictable, consistent, boring output. Most chat apps set a middle value. When you need reliability, like extracting data or grading answers, you want low temperature. When you want brainstorming or story ideas, higher temperature helps.</p>
+<div class="example"><div class="label">Example</div>
+<p>Ask twice: "Give me a tagline for a coffee shop." The first run might say "Where mornings wake up happy." The second might say "Brewed bold, served warm." Both are fine, and the difference is the point: sampling gives variety. If you needed exactly one deterministic answer, you would lower the temperature instead of running it twice.</p>
+</div>
+<p>Variability is why retrying sometimes works and why testing agents is tricky. A prompt that works once might fail on the third run. Serious agent builders test prompts many times and measure the failure rate, because one good run proves nothing.</p>
+
+<h2 id="getting-a-straight-answer">Getting a straight answer</h2>
+<p>Models often hedge, ramble, or bury the answer in throat-clearing. You can fix most of that with directness in the prompt. Ask for the answer first and the explanation after. Ban filler phrases. Set a length limit. The model is not being evasive on purpose; it is defaulting to the verbose, polite style that dominates its training data. Your instructions override that default.</p>
+<p>Precision in your question produces precision in the answer. "Tell me about electric cars" invites a wandering essay. "In two sentences, what is the main cost advantage of EVs over gas cars?" forces a straight answer. The more you narrow the target, the less room there is for filler.</p>
+<div class="example"><div class="label">Example</div>
+<p>Instead of "What do you think about our pricing?", write: "Answer in exactly three bullet points: is our pricing too high, too low, or about right for a solo consultant, and why. No introduction." The constraints do the work. You get a usable answer instead of a polite paragraph that says nothing.</p>
+</div>
+<div class="tip"><div class="label">Tip</div>
+<p>The phrase "answer first, then explain" is one of the highest-leverage instructions you can give. It works on almost every model.</p>
+</div>
+<p>Straight answers also make downstream steps easier. An agent that extracts a yes or no from a clear short answer is far more reliable than one parsing a paragraph of hedging. Brevity is not just nice for you; it is load-bearing for automation.</p>
+
+<h2 id="wrong-about-the-world-or-wrong-about-the-text">Wrong about the world, or wrong about the text</h2>
+<p>Not all model mistakes are the same kind, and the fix depends on which kind you are looking at. A model can be wrong about the world: stating a false fact about history, science, or current events. Or it can be wrong about the text in front of it: misreading a document you provided, contradicting its own earlier message, or ignoring an instruction. These two failures need different responses.</p>
+<p>Wrong about the world usually means the model lacked the knowledge, so the fix is to supply it: paste the facts, attach the document, or let it search. Wrong about the text is a reasoning or attention failure, so the fix is structural: shorten the input, ask it to quote the relevant passage first, or break the task into smaller steps so each step has less to get wrong.</p>
+<div class="example"><div class="label">Example</div>
+<p>You paste a 30-page contract and ask "what is the termination notice period?" If the model says "60 days" but the contract says "30 days", that is wrong about the text: the answer was right in front of it. Fix it by asking: "Quote the exact sentence about termination notice, then answer." Forcing the quote anchors the answer to the text.</p>
+</div>
+<p>Learning to classify the error saves you from applying the wrong fix. Adding more documents will not fix a model that misreads the one document it has. And simplifying the prompt will not fix a model that simply never learned the fact you are asking about.</p>
+
+<h2 id="what-every-token-costs">What every token costs</h2>
+<p>Models do not read words; they read tokens, which are chunks of text roughly three quarters of a word in English. Every token you send in, and every token the model generates out, costs money on paid APIs and consumes a limited budget called the context window. Understanding tokens is understanding the economics of AI.</p>
+<p>A short chat message might be 50 tokens. A long document can be 50,000. If a provider charges per million tokens, pasting a whole book into every request gets expensive fast, and long conversations get slower and pricier as history grows. Output tokens usually cost more than input tokens, so asking for a rambling 2,000-word answer costs more than asking for a tight 200-word one.</p>
+<div class="example"><div class="label">Example</div>
+<p>You build a support bot that pastes a 20,000-token product manual into every request. At typical pricing, each user question costs several cents just for the manual. Serve 10,000 questions and you have spent hundreds of dollars on tokens nobody asked about. The fix: retrieve only the relevant manual section per question, maybe 1,000 tokens, and cut the cost by 95 percent.</p>
+</div>
+<p>This is why experienced builders are obsessed with keeping context lean. Every lesson later about retrieval, caching, and memory is really about spending tokens only where they earn their keep. Tokens are the budget; everything else is how you spend it.</p>
+
+<h2 id="watch-a-tiny-agent-work">Watch a tiny agent work</h2>
+<p>An agent is a loop: the model thinks, takes an action with a tool, reads the result, thinks again, and repeats until the job is done. That loop is the whole idea. Strip away the frameworks and dashboards, and every agent you will ever meet is this cycle running on top of a language model.</p>
+<p>Walk through a tiny example. The user asks: "What is the weather in Austin and should I bring a jacket?" The agent's first thought: I need the current weather, so I will call the weather tool. The tool returns: 48 degrees and raining. The agent thinks again: 48 and raining means yes, bring a jacket. It answers. Two model calls, one tool call, one loop. That is an agent.</p>
+<div class="example"><div class="label">Example</div>
+<p>A research agent gets: "Find the launch date of the James Webb telescope." Thought: I should search the web. Action: calls the search tool. Observation: results say December 25, 2021. Thought: I have the answer. Action: replies to the user. If the first search had failed, the loop would have continued: thought, new search, observation, until it succeeded or gave up.</p>
+</div>
+<p>Notice what the model actually decides: which tool to call, what arguments to pass, and when to stop. Everything else, the tools, the loop, the stopping rules, is engineering around it. Once you can picture this loop, the rest of the agent lessons are details about making each part reliable.</p>
+
+<h2 id="one-prompt-many-requests">One prompt, many requests</h2>
+<p>Every time a model generates an answer, that is one request to the provider, and providers bill per request plus per token. This sounds trivial, but it shapes real design decisions. An agent that loops ten times to answer one user question makes ten requests. A chat app that summarizes a long thread by resending the whole history resends thousands of tokens every turn. Requests multiply quietly.</p>
+<p>Two costs matter here. The token cost you already know about, and the latency cost: each request takes seconds, and ten sequential requests take ten times as long as one. A user waiting thirty seconds for an agent that looped twelve times will not care how clever the loop was. Speed is a feature, and every request spends it.</p>
+<div class="example"><div class="label">Example</div>
+<p>A naive agent answers "compare these three products" by calling the model once per product, then once more to combine the results: four requests, four round trips. A better design asks for all three comparisons in a single prompt with a strict table format: one request, one round trip, same answer, a quarter of the wait.</p>
+</div>
+<div class="tip"><div class="label">Tip</div>
+<p>When an agent feels slow, count the model calls first. The fix is usually fewer, bigger calls, not a faster model.</p>
+</div>
+<p>Good agent builders budget requests the way they budget tokens. They ask: does this step earn its own request, or can it ride along with another one? Fewer requests means lower cost, lower latency, and fewer chances for something to go wrong mid-loop.</p>
+
+<h2 id="assistant-or-agent">Assistant or agent?</h2>
+<p>People use the words assistant and agent loosely, but the difference matters. An assistant answers you and stops. An agent works toward a goal, using tools and multiple steps without asking you at every turn. A chatbot that drafts your email is an assistant. A system that reads your inbox, drafts replies, checks your calendar for conflicts, and sends the replies is an agent.</p>
+<p>The line is about autonomy, not intelligence. The same model can be either one depending on how it is wrapped. Give it a chat box and it is an assistant. Give it tools, a goal, and permission to loop, and it becomes an agent. The model did not change. The harness around it did.</p>
+<div class="example"><div class="label">Example</div>
+<p>You ask both to "book me a flight to Chicago next Friday." The assistant replies with flight options and links, and you do the booking. The agent searches flights, picks one matching your usual preferences, fills in your details, and asks you to confirm payment. Same request, different amount of work done before coming back to you.</p>
+</div>
+<p>This distinction tells you what to build. If the task is one question with one answer, an assistant is simpler, cheaper, and easier to control. Reach for an agent when the task needs multiple steps, tool use, or decisions along the way. Do not pay the complexity cost of an agent for a job an assistant can do.</p>
+
+<h2 id="who-decides-the-next-step">Who decides the next step</h2>
+<p>In an agent loop, someone has to decide what happens next: run another tool, ask the user a question, or finish. That decision can be made by the model itself, by fixed code, or by a mix of both. Where you put that decision is one of the biggest design choices in building agents, because it trades flexibility against reliability.</p>
+<p>Letting the model decide each step is flexible: it can handle surprises and pick unusual tool sequences. But it is also unpredictable and expensive, since every decision costs a model call. Hard-coding the steps in code is reliable and cheap, but brittle: the first unexpected situation breaks the script. Most good agents mix the two, with code handling the known path and the model handling judgment calls.</p>
+<div class="example"><div class="label">Example</div>
+<p>A refund agent could be fully model-driven: at each step the model chooses between "look up order", "check policy", "issue refund", or "escalate". Or it could be coded: always look up the order, then check the policy, then let the model decide only the final call of refund versus escalate. The second design is calmer, cheaper, and easier to debug, because only one decision is left to chance.</p>
+</div>
+<p>When an agent misbehaves, ask who decided the bad step. If the model chose it, tighten the prompt or the allowed actions. If the code forced it, fix the logic. Knowing where decisions live is knowing where to apply the fix.</p>
+
+<h2 id="reading-the-token-counts">Reading the token counts</h2>
+<p>Every model response comes back with a usage report: how many tokens went in, how many came out. Learning to read these numbers is like learning to read a water meter. It tells you where your budget is going and which part of your system is the expensive one.</p>
+<p>The two numbers to watch are prompt tokens and completion tokens. Prompt tokens are everything you sent: system prompt, conversation history, retrieved documents, tool results. Completion tokens are what the model wrote back. If prompt tokens are huge, your context is bloated: trim history, retrieve less, or summarize. If completion tokens are huge, your answers are rambling: demand shorter formats.</p>
+<div class="example"><div class="label">Example</div>
+<p>Your agent's usage report shows 12,000 prompt tokens and 200 completion tokens per turn. The model is reading a novel and writing a postcard. The fix is on the input side: the tool results being pasted in are probably full pages when only a paragraph is needed. Cut the input and the cost drops immediately.</p>
+</div>
+<div class="tip"><div class="label">Tip</div>
+<p>Log token counts from day one, even for prototypes. Cost surprises always arrive later, and logs are the only way to trace them back to the step that caused them.</p>
+</div>
+<p>Token counts also reveal design smells. An agent whose prompt tokens grow every turn is accumulating history it will never use. An agent with wildly varying completion tokens has an output format problem. The numbers tell you what to fix before the bill does.</p>
+
+<h2 id="caching-and-effort">Caching and effort</h2>
+<p>Some parts of a prompt barely change between requests: the system prompt, the product manual, the conversation prefix. Providers let you cache those stable parts so you pay full price once and a fraction after that. Caching is the closest thing to a free lunch in AI economics, and using it well can cut costs dramatically on repeated workloads.</p>
+<p>There is a second kind of economy: effort. Not every question deserves the model's hardest thinking. A simple lookup can use a small, cheap, fast model. A tricky reasoning problem earns the big model. Routing each task to the right effort level, instead of running everything on the most expensive model, is how serious systems stay affordable.</p>
+<div class="example"><div class="label">Example</div>
+<p>A support bot caches its 8,000-token knowledge base, so repeat questions cost almost nothing for the cached part. Then it routes: "what are your hours?" goes to a tiny fast model, while "my invoice has three errors and I need them explained" goes to the flagship model. Same bot, a fraction of the cost of running everything at full power.</p>
+</div>
+<p>The principle is simple: never pay twice for the same tokens, and never pay flagship prices for commodity questions. Cache what repeats, and match the model's effort to the task's difficulty. Both habits compound as usage grows.</p>
+
+<h2 id="answers-from-documents-the-model-never-saw">Answers from documents the model never saw</h2>
+<p>A model's training data ends at some point in the past, and it never saw your company's private documents. Retrieval fills that gap: when you ask a question, the system searches your documents for relevant passages and pastes them into the prompt. The model then answers from those passages. This pattern is called retrieval-augmented generation, and it is how AI answers questions about things it was never trained on.</p>
+<p>The quality of the answer depends almost entirely on the quality of the retrieval. The model can only use what the search found. If the search returns the wrong section of the manual, the model will confidently answer from the wrong section. Retrieval is the part most beginners skip and the part experts spend the most time improving: better chunking, better search, reranking the top hits.</p>
+<div class="example"><div class="label">Example</div>
+<p>You ask a company bot: "What is our refund policy for annual plans?" The bot searches the help center, finds the refunds article, pastes the relevant paragraphs into the prompt, and the model answers: "Annual plans can be refunded within 30 days." The model never learned your policy. It read it thirty seconds ago, in the prompt.</p>
+</div>
+<div class="tip"><div class="label">Tip</div>
+<p>Tell the model to say "I could not find this in the documents" when the retrieved passages do not contain the answer. Otherwise it will fill the gap from training data and present it as your policy.</p>
+</div>
+<p>Retrieval is also the main defense against hallucination for factual questions. A model answering from documents you provided is far more trustworthy than one answering from memory. Ground the answer, then trust it.</p>
+
+<h2 id="where-memory-comes-from">Where memory comes from</h2>
+<p>Models do not remember you between conversations. Each session starts blank. So when an app seems to remember your name, your preferences, or last week's project, that memory was engineered: the app stored notes about you somewhere and injected them into the prompt. Memory in AI systems is always stored text being reread, never a brain forming memories.</p>
+<p>There are a few common designs. Conversation history is the simplest memory: past messages are included in the prompt until the context fills up, then old ones are summarized or dropped. Long-term memory stores facts across sessions, like "prefers concise answers" or "works in healthcare", in a database or file, and retrieves the relevant ones per conversation. Some systems let the model itself write and update these notes as it learns about you.</p>
+<div class="example"><div class="label">Example</div>
+<p>A coding assistant remembers that you prefer TypeScript over JavaScript. It does not actually remember. On every new session, the app loads your saved preference ("user prefers TypeScript") into the system prompt. The model reads it fresh each time and behaves accordingly. Delete that stored line and the "memory" vanishes instantly.</p>
+</div>
+<p>This is why memory features deserve scrutiny. Ask where the notes live, who can read them, and how to delete them. And when building, keep memory explicit and editable: a visible list of stored facts beats a mysterious black box, because the user can correct what is wrong instead of fighting a ghost.</p>
+
+<footer><p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p></footer>
 </main>
 </div>
 </body>

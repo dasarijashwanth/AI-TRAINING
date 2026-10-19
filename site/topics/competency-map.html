@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competency Map | AI Training by Jashwanth Dasari</title>
+<link rel="stylesheet" href="/AI-TRAINING/css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+  <div class="tagline">by Jashwanth Dasari</div>
+  <nav>
+    <a href="/AI-TRAINING/">Home</a>
+    <div class="section">Learn</div>
+    <a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
+    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+    <a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
+    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+    <div class="section">Reference</div>
+    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+    <a href="/AI-TRAINING/topics/topic-map.html">9. Topic Map</a>
+    <a href="/AI-TRAINING/topics/competency-map.html" class="active">10. Competency Map</a>
+    <a href="/AI-TRAINING/topics/about.html">11. About</a>
+  </nav>
+</aside>
+<main class="content">
+<h1>Competency Map</h1>
+<p>Reading a section is not the same as being able to do the thing. For each of the six learning sections below, here are the concrete skills you should walk away with, plus one small project that proves you actually have them. If you can do every item on a list, you own that section. If not, you know exactly what to go back and practice.</p>
+
+<h2><a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a></h2>
+<p>After this section you can:</p>
+<ul>
+<li>Explain in plain language what an LLM is doing when it generates text, and why it sometimes hallucinates.</li>
+<li>Describe what tokens are and estimate how long your inputs and outputs are in tokens.</li>
+<li>Explain what a context window is and why stuffing too much into it degrades quality.</li>
+<li>Describe how temperature changes model output and when to turn it up or down.</li>
+<li>Explain what embeddings are and how they let a model search by meaning instead of keywords.</li>
+</ul>
+<p><strong>How to prove it:</strong> explain tokens, context windows, and temperature to a friend with zero AI background in under five minutes, using a real example from your own work.</p>
+
+<h2><a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a></h2>
+<p>After this section you can:</p>
+<ul>
+<li>List the main ways AI systems fail in practice: hallucinations, data leaks, prompt injection, and biased or harmful output.</li>
+<li>Decide what data is safe to paste into an AI tool and what must never leave your machine.</li>
+<li>Write a short safety checklist for any AI workflow you set up.</li>
+<li>Spot a prompt injection attempt in a document or webpage an agent will read.</li>
+<li>Explain to a teammate why you review agent output before acting on it, with a concrete example of what can go wrong.</li>
+</ul>
+<p><strong>How to prove it:</strong> audit one AI workflow you already use (or a sample one), write down its top three risks, and add one safeguard for each.</p>
+
+<h2><a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a></h2>
+<p>After this section you can:</p>
+<ul>
+<li>Write a prompt that gives the agent a clear role, task, and output format instead of a vague one-liner.</li>
+<li>Break a big task into a sequence of agent-sized steps with checkpoints you verify yourself.</li>
+<li>Review agent output critically and catch the confident-sounding mistakes.</li>
+<li>Set up a small repeatable workflow, like a weekly report or inbox triage, that an agent runs for you.</li>
+<li>Know when to do the task yourself because the stakes or ambiguity are too high for an agent.</li>
+</ul>
+<p><strong>How to prove it:</strong> automate one real recurring task from your job end to end, and use it for two weeks straight.</p>
+
+<h2><a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a></h2>
+<p>After this section you can:</p>
+<ul>
+<li>Get a working first draft of a feature from an agent, then shape it into production-quality code yourself.</li>
+<li>Use an agent to debug a failing test or error by giving it the error output and the relevant code.</li>
+<li>Ask an agent to review your code for bugs, edge cases, and readability before you open a pull request.</li>
+<li>Generate unit tests for your code and judge which of the generated tests are actually worth keeping.</li>
+<li>Refactor legacy code with an agent while keeping behavior identical, verified by tests.</li>
+<li>Explain what the agent-generated code does line by line, because you never ship code you do not understand.</li>
+</ul>
+<p><strong>How to prove it:</strong> build a small CLI tool or script with an agent's help, write the tests yourself, and get it running for a real user (even if that user is you).</p>
+
+<h2><a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a></h2>
+<p>After this section you can:</p>
+<ul>
+<li>Write a system prompt that gives an agent a consistent personality, rules, and scope.</li>
+<li>Connect an agent to your own documents or data so it answers from your knowledge, not just its training data.</li>
+<li>Give an agent a tool (like web search or a calculator) and describe exactly when it should use it.</li>
+<li>Set guardrails so the agent refuses or escalates the tasks it should not handle.</li>
+<li>Iterate on a custom agent using real examples: try, measure, adjust, repeat.</li>
+</ul>
+<p><strong>How to prove it:</strong> build a custom agent for one real audience (your team, your community, your customers) and have three real people try it and give feedback.</p>
+
+<h2><a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a></h2>
+<p>After this section you can:</p>
+<ul>
+<li>Design a multi-step agent system: which steps exist, what data flows between them, and where a human checks in.</li>
+<li>Build a working agent with tools, memory, and error handling, not just a chat wrapper.</li>
+<li>Write an eval suite with real examples and use it to decide whether a change actually improved things.</li>
+<li>Measure cost per task and pick models using evidence, not hype.</li>
+<li>Deploy an agent so other people can use it, with logging and a way to see what it did.</li>
+<li>Handle the failure modes: retries, timeouts, fallbacks, and graceful degradation when the model misbehaves.</li>
+</ul>
+<p><strong>How to prove it:</strong> ship a deployed agent with a documented eval score and a known cost per task, then present it to someone who was not involved in building it.</p>
+
+<footer>
+<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>
