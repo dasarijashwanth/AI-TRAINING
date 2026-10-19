@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using AI Agents | AI Training by Jashwanth Dasari</title>
+<link rel="stylesheet" href="/AI-TRAINING/css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+  <div class="tagline">by Jashwanth Dasari</div>
+  <nav>
+    <a href="/AI-TRAINING/">Home</a>
+    <div class="section">Learn</div>
+    <a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
+    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+    <a href="/AI-TRAINING/topics/using-agents.html" class="active">3. Using AI Agents</a>
+    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+    <div class="section">Reference</div>
+    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+    <a href="/AI-TRAINING/topics/about.html">9. About</a>
+  </nav>
+</aside>
+<main class="content">
+<h1>Using AI Agents</h1>
+<p>A chatbot answers one question. An agent works toward a goal: it plans steps, uses tools, reads the results, and adjusts. This page is about using agents well, as a user, before you ever build one.</p>
+
+<h2>What makes it an agent</h2>
+<p>Three ingredients turn a model into an agent:</p>
+<ol>
+<li><strong>A goal</strong>, not just a question. "Book me the cheapest flight" instead of "what are flight prices."</li>
+<li><strong>Tools</strong> it can call: web search, a calendar, a code runner, a database.</li>
+<li><strong>A loop</strong>: think, act, observe the result, repeat until the goal is done or it gets stuck.</li>
+</ol>
+<p>If the system cannot take actions and see what happened, it is a chatbot with extra steps, not an agent.</p>
+
+<h2>When agents are worth it</h2>
+<p>Agents shine on multi-step tasks where the steps depend on each other: researching a topic across sources, triaging a support inbox, or refactoring code across files. They are overkill for single questions. "Summarize this paragraph" does not need an agent; it needs one model call.</p>
+<div class="tip"><div class="label">Decision rule</div>
+<p>If you can write down the exact steps in advance, write a script. If the steps depend on what you find along the way, use an agent. If it is one question, just ask the model.</p>
+</div>
+
+<h2>Prompting patterns that work</h2>
+<p>Agents respond to structure. Four patterns cover most use:</p>
+
+<h3>1. Give the goal, the constraints, and the finish line</h3>
+<div class="example"><div class="label">Example</div>
+<p>Weak: "Research EV pricing." Strong: "Goal: compare total cost of ownership for three EVs under $40k. Constraints: US pricing, 2026 models, include insurance estimates. Finish when you have a table with all three and a one-paragraph recommendation." The agent now knows what done looks like.</p>
+</div>
+
+<h3>2. Show, do not just tell</h3>
+<p>One short example of the output format beats three paragraphs of description. "Format the result exactly like this: ..." followed by a two-line sample.</p>
+
+<h3>3. Break big goals into checkpoints</h3>
+<p>"First find the three candidates and stop. I will pick one before you continue." Checkpoints keep long agent runs from drifting, and they let you correct course cheaply.</p>
+
+<h3>4. Tell it what to do when stuck</h3>
+<p>"If a source is paywalled, skip it and note that you skipped it. If two sources conflict, report both. Never invent a number." Agents guess when they lack instructions for failure. Write the failure instructions.</p>
+
+<h2>Supervising an agent</h2>
+<p>Think of the agent as a fast intern, not an oracle. Skim its intermediate steps, not just the final answer. The moment you see it going down a wrong path, stop it and redirect; a correction at step 2 saves twenty wasted steps. And keep the safety habits from the <a href="/AI-TRAINING/topics/safety.html">AI Safety</a> page: approve irreversible actions yourself, and check anything that will be sent to another human.</p>
+
+<h2>Try it today</h2>
+<p>Pick one real multi-step task from your week, something like "find three options for X and compare them." Write the goal, constraints, and finish line as above, add one checkpoint, and run it. Compare the result to doing it yourself. You will learn more from one real run than from ten articles about agents.</p>
+
+<footer>
+<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guides | AI Training by Jashwanth Dasari</title>
+<link rel="stylesheet" href="/AI-TRAINING/css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+  <div class="tagline">by Jashwanth Dasari</div>
+  <nav>
+    <a href="/AI-TRAINING/">Home</a>
+    <div class="section">Learn</div>
+    <a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
+    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+    <a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
+    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+    <div class="section">Reference</div>
+    <a href="/AI-TRAINING/topics/guides.html" class="active">7. Guides</a>
+    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+    <a href="/AI-TRAINING/topics/about.html">9. About</a>
+  </nav>
+</aside>
+<main class="content">
+<h1>Guides</h1>
+<p>Three practical how-tos for the decisions that come up in every AI project: which model to pick, how to keep costs under control, and how to run your first eval.</p>
+
+<h2>Guide 1: Pick a model</h2>
+<p>Do not start with the biggest model. Start with the cheapest one that might work, and upgrade only when measurements say so.</p>
+<ol>
+<li><strong>Classify the task.</strong> Is it creative writing, factual extraction, reasoning, or code? Different models have different strengths, and the provider's model card usually says which.</li>
+<li><strong>Test three tiers.</strong> Run your 10 hardest examples through a small, a medium, and a large model. Score them by hand or with a simple rubric.</li>
+<li><strong>Pick the smallest that passes.</strong> If the small model gets 9 of 10 right and the large gets 10 of 10 at 20x the price, the small one usually wins for production. Reserve the large model for the cases the small one fails.</li>
+</ol>
+<div class="example"><div class="label">Example</div>
+<p>A ticket-classification task: the small model hits 92% accuracy at $0.02 per thousand tickets, the large hits 95% at $0.40. You ship the small model and route only low-confidence tickets to the large one. Blended accuracy lands near 94% at a fraction of the cost. That routing pattern is the whole game.</p>
+</div>
+
+<h2>Guide 2: Control costs</h2>
+<p>AI bills surprise people because every token counts and agents multiply tokens. Five controls:</p>
+<ol>
+<li><strong>Shorten prompts.</strong> Cut system prompts to what the model actually uses. Every token in the prompt is paid on every call.</li>
+<li><strong>Cap outputs.</strong> Set <code>max_tokens</code> to the longest answer you actually need. Rambling answers are the most expensive kind.</li>
+<li><strong>Cache repeats.</strong> If the same question comes up often, cache the answer. Many providers also offer prompt caching for repeated prefixes.</li>
+<li><strong>Route by difficulty.</strong> Cheap model first, strong model only on low confidence or hard cases, as in the example above.</li>
+<li><strong>Set a budget alarm.</strong> Track spend per day and per feature. A simple dashboard beats a surprise invoice.</li>
+</ol>
+<div class="tip"><div class="label">The one number to know</div>
+<p>Cost per completed task. Not cost per token, not cost per call. If a support ticket costs $0.003 to resolve with AI versus $4 with a human, the business case is obvious and you can defend every other number from it.</p>
+</div>
+
+<h2>Guide 3: Run your first eval</h2>
+<p>An eval is a test suite for AI behavior. Here is the minimum viable version, doable in an afternoon:</p>
+<ol>
+<li><strong>Collect 10 to 30 real examples.</strong> Real user questions, real tickets, real tasks. Not examples you invented; the messier the better.</li>
+<li><strong>Write down the expected outcome for each.</strong> The right answer, the right tool call, or the right action. Keep it short: keywords to look for, not essays.</li>
+<li><strong>Run your system over all of them and score.</strong> A simple script that checks "does the answer contain the expected keywords" is enough to start.</li>
+<li><strong>Record the score and the cost.</strong> Accuracy and cost per task, side by side. This is your baseline.</li>
+<li><strong>Change one thing, re-run, compare.</strong> A new system prompt, a new tool, a different model. If the score goes up without the cost exploding, keep the change.</li>
+</ol>
+<div class="example"><div class="label">Example</div>
+<p>You run 20 support tickets through your agent: 17 correct answers, 3 wrong, cost $0.05 total. Baseline: 85% at $0.0025 per ticket. You add a confidence gate that escalates uncertain tickets: now 19 correct-or-escalated, cost $0.06. The eval tells you the gate was worth it, in numbers you can show anyone.</p>
+</div>
+
+<h2>Keep these three together</h2>
+<p>Model selection, cost control, and evals are one practice, not three. The eval tells you which model is good enough, the cost tracking tells you which one is affordable, and the routing pattern from Guide 1 is how you get both. Revisit all three monthly; models, prices, and your tasks all change.</p>
+
+<footer>
+<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

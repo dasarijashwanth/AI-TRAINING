@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building Agents | AI Training by Jashwanth Dasari</title>
+<link rel="stylesheet" href="/AI-TRAINING/css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+  <div class="tagline">by Jashwanth Dasari</div>
+  <nav>
+    <a href="/AI-TRAINING/">Home</a>
+    <div class="section">Learn</div>
+    <a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
+    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+    <a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
+    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+    <a href="/AI-TRAINING/topics/building-agents.html" class="active">6. Building Agents</a>
+    <div class="section">Reference</div>
+    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+    <a href="/AI-TRAINING/topics/about.html">9. About</a>
+  </nav>
+</aside>
+<main class="content">
+<h1>Building Agents</h1>
+<p>Now we build. An agent is simpler than it sounds: a loop around a model, some tools, and a way to know if it is working. This page gives you the architecture and a small worked example you can run.</p>
+
+<h2>The architecture: loop, tools, evals</h2>
+<p>Every agent has three parts:</p>
+<ol>
+<li><strong>The loop.</strong> Send the goal and history to the model, read its response. If it called a tool, run the tool and feed the result back in. Repeat until it gives a final answer or hits a step limit.</li>
+<li><strong>The tools.</strong> The actions the agent can take, each with a name, description, and parameters (see <a href="/AI-TRAINING/topics/customizing-agents.html">Customizing Agents</a>).</li>
+<li><strong>The evals.</strong> A set of test tasks with expected outcomes, run regularly. Without evals you are flying blind; with them, every change is measurable.</li>
+</ol>
+<div class="tip"><div class="label">Start here</div>
+<p>Build the evals before the agent. A golden set of 10 to 30 example tasks with expected answers tells you whether each change helped. This is the single highest-leverage habit in agent engineering.</p>
+</div>
+
+<h2>Worked example: a tiny Q&amp;A agent</h2>
+<p>Here is a minimal agent in Python. It uses a mock model function so you can run it with zero API keys; swap in a real model call when you are ready.</p>
+<pre>import json
+
+TOOLS = {
+    "get_weather": lambda city: {"temp_c": 22, "condition": "sunny"}
+    if city == "Miami" else {"temp_c": 5, "condition": "rainy"},
+}
+
+def mock_model(messages):
+    """Pretend model: asks for weather when it sees a city."""
+    last = messages[-1]["content"].lower()
+    if "weather" in last and "tool_result" not in last:
+        city = "Miami" if "miami" in last else "Boston"
+        return {"tool": "get_weather", "args": {"city": city}}
+    return {"answer": f"Done. Tool results seen: "
+            + str([m for m in messages if m.get("tool_result")])}
+
+def run_agent(goal, max_steps=5):
+    messages = [{"role": "user", "content": goal}]
+    for step in range(max_steps):
+        out = mock_model(messages)
+        if "answer" in out:
+            return out["answer"]
+        result = TOOLS[out["tool"]](**out["args"])
+        messages.append({"role": "assistant",
+                         "content": json.dumps(out)})
+        messages.append({"role": "tool", "tool_result": result,
+                         "content": f"{out['tool']} returned {result}"})
+    return "Stopped: hit step limit."
+
+print(run_agent("What is the weather in Miami?"))</pre>
+<p>Trace the loop: the goal goes in, the model requests the <code>get_weather</code> tool, we run it, the result goes back into the messages, and the model produces the final answer. A real agent replaces <code>mock_model</code> with an LLM call that can output tool requests, but the loop is identical.</p>
+
+<h2>Evals: the worked example continues</h2>
+<p>Give this agent a golden set:</p>
+<pre>golden = [
+    {"goal": "What is the weather in Miami?",
+     "expect_tool": "get_weather",
+     "expect_in_answer": "sunny"},
+    {"goal": "What is the weather in Boston?",
+     "expect_tool": "get_weather",
+     "expect_in_answer": "rainy"},
+]</pre>
+<p>Score each run: did it call the right tool, and does the answer contain the expected fact? Track that score every time you change the system prompt or add a tool. When the score drops, you broke something. When it rises, the change earned its place.</p>
+<div class="example"><div class="label">Example</div>
+<p>You add a second tool, <code>get_forecast</code>. The golden set still passes, so the new tool did not confuse the agent. Then you reword the system prompt and one case fails: the agent now calls the forecast tool for a current-weather question. The eval caught in seconds what users would have reported in days.</p>
+</div>
+
+<h2>Cost-aware design</h2>
+<p>Every loop step costs tokens. Two habits keep agents affordable: cap <code>max_steps</code> so a confused agent cannot loop forever, and use a cheap model for simple steps (tool selection) and a strong model only for hard reasoning. Measure cost per task in your evals, not just accuracy, and you will spot the expensive patterns early.</p>
+
+<h2>Where to go from here</h2>
+<p>Grow this skeleton one piece at a time: real model calls, retrieval over your own documents (RAG), a confidence gate that escalates instead of guessing, and logging of every step. Each addition gets validated against the golden set. That is the whole discipline: loop, tools, evals, repeat.</p>
+
+<footer>
+<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

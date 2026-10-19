@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Concepts | AI Training by Jashwanth Dasari</title>
+<link rel="stylesheet" href="/AI-TRAINING/css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+  <div class="tagline">by Jashwanth Dasari</div>
+  <nav>
+    <a href="/AI-TRAINING/">Home</a>
+    <div class="section">Learn</div>
+    <a href="/AI-TRAINING/topics/concepts.html" class="active">1. AI Concepts</a>
+    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+    <a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
+    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+    <div class="section">Reference</div>
+    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+    <a href="/AI-TRAINING/topics/about.html">9. About</a>
+  </nav>
+</aside>
+<main class="content">
+<h1>AI Concepts</h1>
+<p>Before you use AI well, it helps to know what is happening under the hood. Not the math. The mental model. This page gives you five ideas that explain almost everything AI tools do.</p>
+
+<h2>What an LLM actually is</h2>
+<p>A large language model is a prediction machine. Given some text, it predicts the most likely next piece of text, one piece at a time. Everything that looks like reasoning, coding, or creativity comes from that one simple loop repeated thousands of times. It does not look up facts in a database. It does not run code in its head. It predicts.</p>
+<p>Why this matters: when the model is wrong, it is usually because the wrong continuation was statistically likely, not because it "lied." That is the root of hallucinations, and understanding it changes how you prompt, verify, and deploy.</p>
+
+<h2>Tokens</h2>
+<p>Models do not read words. They read tokens, which are chunks of text. The word "unbelievable" might be three tokens: "un", "believ", "able". Short common words are often one token; rare words split into more.</p>
+<div class="example"><div class="label">Example</div>
+<p>Ask a model to count the letter R in "strawberry" and it may fail, because it never saw letters. It saw tokens like "straw" and "berry". If you need letter-level work, spell the word out with spaces: "s t r a w b e r r y". Now each letter is its own token and the model can count.</p>
+</div>
+<p>Tokens are also the currency of AI pricing. APIs charge per million tokens, so a 2,000-token answer costs twice as much as a 1,000-token one. Shorter prompts and shorter answers are real money.</p>
+
+<h2>Context windows</h2>
+<p>The context window is how much text the model can see at once: your prompt plus everything it has generated so far. Modern models handle 100,000 to 1,000,000+ tokens, which sounds huge. In practice, models pay the most attention to the start and the end of the context, and less to the middle. This is called the lost-in-the-middle effect.</p>
+<div class="tip"><div class="label">Practical rule</div>
+<p>Put the most important instruction at the very end of your prompt, right before the model starts writing. If you paste a long document, repeat the key question after it. Keep prompts as short as they can be while still complete.</p>
+</div>
+
+<h2>Temperature</h2>
+<p>Temperature controls randomness. At temperature 0, the model always picks the most likely next token: deterministic, boring, reliable. At higher temperatures (0.7 to 1.0), it samples from less likely options: more creative, more surprising, more wrong.</p>
+<div class="example"><div class="label">Example</div>
+<p>Writing a product description: temperature 0.8 gives you varied, lively copy. Extracting invoice totals into JSON: temperature 0 gives you the same correct answer every time. Match the temperature to the job: creative work wants heat, factual work wants cold.</p>
+</div>
+
+<h2>Embeddings</h2>
+<p>An embedding turns text into a list of numbers (a vector) that captures meaning. Similar meanings get similar numbers. This is what makes semantic search possible: you embed your documents once, embed the user's question, and find the documents with the closest numbers.</p>
+<div class="example"><div class="label">Example</div>
+<p>A helpdesk search for "my card was charged twice" should find the article titled "Duplicate billing charges" even though they share no words. Keyword search fails here. Embedding search succeeds, because both sentences land near each other in vector space. This is the retrieval half of RAG, which the <a href="/AI-TRAINING/topics/building-agents.html">Building Agents</a> page uses.</p>
+</div>
+
+<h2>Putting it together</h2>
+<p>Every AI product you will meet is some combination of these five ideas: a prediction model, reading and writing tokens, working inside a context window, tuned with temperature, often paired with embeddings for search. Learn these and the rest of this site will feel familiar.</p>
+
+<footer>
+<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

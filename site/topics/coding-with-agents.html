@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coding with AI Agents | AI Training by Jashwanth Dasari</title>
+<link rel="stylesheet" href="/AI-TRAINING/css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+  <div class="tagline">by Jashwanth Dasari</div>
+  <nav>
+    <a href="/AI-TRAINING/">Home</a>
+    <div class="section">Learn</div>
+    <a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
+    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+    <a href="/AI-TRAINING/topics/using-agents.html">3. Using AI Agents</a>
+    <a href="/AI-TRAINING/topics/coding-with-agents.html" class="active">4. Coding with AI Agents</a>
+    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+    <div class="section">Reference</div>
+    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+    <a href="/AI-TRAINING/topics/about.html">9. About</a>
+  </nav>
+</aside>
+<main class="content">
+<h1>Coding with AI Agents</h1>
+<p>AI coding agents can write, test, and debug software alongside you. Used well, they make you faster. Used carelessly, they fill your repo with confident bugs. This page is the workflow that keeps you on the right side of that line.</p>
+
+<h2>The workflow: plan, generate, verify</h2>
+<p>Never start with "build me the feature." Start with a plan you could defend:</p>
+<ol>
+<li><strong>You write the plan.</strong> What the feature does, the files it touches, the edge cases, how you will test it. A few bullet points is enough.</li>
+<li><strong>The agent generates.</strong> Give it the plan plus repo context. Small tasks in one go; big tasks one file or one function at a time.</li>
+<li><strong>You verify.</strong> Read the diff, run the tests, run the code. Every time. No exceptions.</li>
+</ol>
+<div class="example"><div class="label">Example</div>
+<p>You need a CSV export endpoint. You write: "Add GET /export returning CSV of the transactions table. Files: app/main.py (route), app/export.py (new, CSV writer). Edge cases: empty table returns headers only; cap at 100k rows. Test: new tests/test_export.py checks headers, one row, and the cap." The agent writes the code. You read every line of the diff, run pytest, and curl the endpoint yourself before merging.</p>
+</div>
+
+<h2>Review habits that catch AI mistakes</h2>
+<p>AI-generated code has a failure signature. Watch for it:</p>
+<ul>
+<li><strong>Invented APIs.</strong> The model may call library functions that do not exist. If a call looks unfamiliar, check the docs.</li>
+<li><strong>Silent error swallowing.</strong> Generated code loves bare <code>except: pass</code>. Replace with real error handling.</li>
+<li><strong>Missing edge cases.</strong> It handles the happy path beautifully and forgets empty inputs, nulls, and timeouts. Your plan's edge cases are the checklist.</li>
+<li><strong>Over-engineering.</strong> Ask for the simplest version first. Abstractions can come later, once the simple version works.</li>
+</ul>
+<div class="tip"><div class="label">The 30-second review</div>
+<p>For every AI-generated diff, ask: does it run, does it handle the edge cases in my plan, and can I explain each line? If you cannot explain a line, do not merge it.</p>
+</div>
+
+<h2>What to delegate vs what to keep</h2>
+<p>Delegate: boilerplate, test scaffolding, docstrings, refactors with clear before/after behavior, and "write the boring version first" drafts. Keep: architecture decisions, security-sensitive code (auth, payments, crypto), and anything where you are learning. If you let the agent write code you do not understand in a domain you are studying, you are renting knowledge you will never own.</p>
+
+<h2>Tests are the contract</h2>
+<p>The single habit that makes AI coding safe: tests written from your plan, not from the generated code. Write the test first, or at least write the test expectations yourself, then let the agent implement until the tests pass. A green test suite you designed is proof the code does what you meant. A green suite the agent wrote to match its own code proves nothing.</p>
+<div class="example"><div class="label">Example</div>
+<p>Before the agent writes the CSV export, you write <code>test_export_empty_table_returns_headers_only</code>. Now the agent has a target it cannot redefine. When the test passes, you have verified behavior, not just output.</p>
+</div>
+
+<h2>Iterate in small loops</h2>
+<p>Long agent sessions drift. Keep tasks under 15 minutes of agent work, commit or checkpoint often, and start a fresh session for each new task with the relevant context pasted in. Small loops mean small mistakes, and small mistakes are cheap to fix.</p>
+
+<footer>
+<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>
