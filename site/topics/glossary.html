@@ -32,51 +32,115 @@
 
 <h2>A</h2>
 <p><strong>Agent.</strong> A system that works toward a goal by planning steps, calling tools, and reacting to results in a loop. More than a chatbot: it acts.</p>
+<p><strong>AGENTS.md.</strong> A file you drop in a project folder that tells an AI coding agent how your repo works: how to build, test, and what rules to follow. The agent reads it before doing anything, so it starts off already onboarded.</p>
 <p><strong>API.</strong> A defined way for software to request something from a service, such as sending a prompt to a model and getting text back.</p>
+<p><strong>Approval gate.</strong> A pause point where the agent must stop and get your go-ahead before doing something consequential, like sending a message or pushing code. Nothing risky happens on autopilot.</p>
+
+<h2>B</h2>
+<p><strong>Blast radius.</strong> How much damage one mistake or bad action can do before someone catches it. Good design keeps the blast radius small, so a single wrong step cannot take down everything.</p>
 
 <h2>C</h2>
 <p><strong>Calibration.</strong> How well a model's confidence matches reality. A well-calibrated model that says 80% is right about 80% of the time.</p>
+<p><strong>Chain-of-thought.</strong> The model's habit of working through a problem step by step in words before giving its final answer. Showing its work usually gets better results, and you can read the reasoning to see where it went wrong.</p>
+<p><strong>Chunking.</strong> Splitting long documents into smaller pieces before storing or feeding them to a model. Right-sized chunks make retrieval more accurate, because each piece carries one clear idea.</p>
+<p><strong>Compaction.</strong> Summarizing an old conversation into a short brief so a new session can pick up where you left off without carrying the full history. Think of it as a handoff note from your past self to your future self.</p>
 <p><strong>Confidence gate.</strong> A threshold rule: if the model's confidence is below the bar, escalate to a human instead of answering. The core of safe automation.</p>
 <p><strong>Context window.</strong> The amount of text a model can consider at once, measured in tokens. Everything beyond it is invisible to the model.</p>
+<p><strong>Corpus.</strong> A collection of documents a system can draw on. In RAG setups, the corpus is the library your answers come from.</p>
+
+<h2>D</h2>
+<p><strong>Decoding.</strong> The process the model uses to pick each next token as it writes. Settings like temperature and top-p steer how it decodes.</p>
+<p><strong>Deny by default.</strong> A safety rule where an action is blocked unless it is explicitly allowed. If a request is not on the approved list, it does not run.</p>
 
 <h2>E</h2>
 <p><strong>Embedding.</strong> A list of numbers representing the meaning of text, where similar meanings produce similar numbers. The basis of semantic search.</p>
+<p><strong>EU AI Act.</strong> The European Union's law that sets rules for AI systems based on how risky they are, with the strictest requirements for high-risk uses. Even if you are not in Europe, it shapes what serious builders have to do.</p>
 <p><strong>Eval.</strong> A test suite for AI behavior: a set of tasks with expected outcomes, scored regularly to measure whether changes help.</p>
 
 <h2>F</h2>
+<p><strong>Fallback.</strong> The backup plan that kicks in when the AI is unsure, blocked, or wrong: hand the task to a human or a simpler rule-based path. Every automated flow needs one.</p>
+<p><strong>Few-shot.</strong> Showing a model a few examples of what you want before asking it to do the task, instead of relying on instructions alone. Examples are often worth a thousand words of instruction.</p>
+<p><strong>Fine-tuning.</strong> Training a pretrained model further on your own examples so it behaves the way you want. It is like taking a generalist and apprenticing them in your trade.</p>
 <p><strong>Foundation model.</strong> A large model pretrained on broad data that can be adapted to many downstream tasks, such as the LLMs behind chatbots and agents.</p>
 
 <h2>G</h2>
 <p><strong>Golden set.</strong> A curated collection of example tasks with known-correct outcomes, used as the ground truth for evals.</p>
+<p><strong>Grounding.</strong> Tying a model's answer to real, checkable sources, like retrieved documents or tool results. Grounded answers can be verified; ungrounded ones cannot.</p>
 <p><strong>Guardrail.</strong> A check or rule that constrains AI behavior: blocking disallowed content, filtering PII, or requiring human approval.</p>
 
 <h2>H</h2>
 <p><strong>Hallucination.</strong> A confident, fluent, false output from a model. Sounds right, is not right. Verify before trusting.</p>
 <p><strong>Handoff.</strong> Passing a task from the agent to a human, with context attached, when the agent cannot handle it safely.</p>
+<p><strong>Hook (agent).</strong> A small script that runs automatically when a specific event happens, like before a tool call or after the agent finishes. Hooks let you add checks, logging, or approvals without changing the agent's main logic.</p>
+<p><strong>Human-in-the-loop.</strong> A setup where a person reviews, approves, or corrects the AI's work before it goes out. Use it wherever mistakes would cost you.</p>
+
+<h2>I</h2>
+<p><strong>Inference.</strong> Running a trained model to get an answer. Training builds the brain; inference is the brain doing its job.</p>
+
+<h2>J</h2>
+<p><strong>Jailbreak.</strong> A prompt trick that tries to get the model to break its own rules. Red teams use jailbreaks to find weaknesses before real attackers do.</p>
 
 <h2>L</h2>
+<p><strong>Latency.</strong> The delay between sending a request and getting a response. For real-time agents, latency decides whether the experience feels snappy or broken.</p>
+<p><strong>Least privilege.</strong> The principle of giving an agent only the permissions it truly needs, nothing more. Fewer permissions means less damage when something goes wrong.</p>
 <p><strong>LLM (large language model).</strong> A model trained to predict the next token in text, which produces the fluent language abilities behind modern AI tools.</p>
+<p><strong>Long context.</strong> Models that can hold very large amounts of text in their context window, whole books or entire codebases. Powerful, but feeding them everything is slow and expensive, so retrieval still matters.</p>
 
 <h2>M</h2>
+<p><strong>MCP (Model Context Protocol).</strong> An open standard for connecting AI agents to outside tools and data, like files, databases, and APIs. Think of it as USB for AI: one standard plug, many devices.</p>
 <p><strong>Memory (agent).</strong> Information an agent retains: short-term (the current conversation) or long-term (stored facts recalled across sessions).</p>
 <p><strong>Model card.</strong> Documentation for a model describing what it does, what it was trained on, its limitations, and intended uses.</p>
+<p><strong>Multi-agent.</strong> A setup where several agents work together, each handling part of a task. More power, but also more coordination to get right.</p>
+
+<h2>O</h2>
+<p><strong>Orchestrator.</strong> The coordinator that decides which agent or step runs next in a multi-agent workflow. It does not do the work itself; it runs the show.</p>
+<p><strong>Overfitting.</strong> When a model learns its training data too well, memorizing examples instead of learning the pattern. It aces the practice test and fails the real one.</p>
 
 <h2>P</h2>
+<p><strong>Parameters.</strong> The millions or billions of numbers inside a model that get tuned during training. More parameters usually means more capable, but not always.</p>
+<p><strong>Permission mode.</strong> The rule an agent runs under about what it can do without asking: read-only, ask-before-writing, or full autopilot. Always start strict and loosen on purpose.</p>
+<p><strong>Planning.</strong> The agent's step of figuring out what to do next before acting: breaking a goal into steps, picking tools, and ordering them. Good plans beat fast reflexes.</p>
+<p><strong>Pre-training.</strong> The first, massive phase of model training on huge amounts of text, where the model learns language and general knowledge. Everything else, like fine-tuning, builds on this foundation.</p>
 <p><strong>Prompt.</strong> The text input given to a model, including instructions, context, and the actual request.</p>
 <p><strong>Prompt injection.</strong> An attack where untrusted text (a webpage, email, document) contains hidden instructions that hijack the model's behavior.</p>
 
 <h2>R</h2>
 <p><strong>RAG (retrieval-augmented generation).</strong> A pattern where the system retrieves relevant documents first, then has the model answer using them, grounding responses in real sources with citations.</p>
+<p><strong>Reasoning model.</strong> A model designed to think through hard problems with extended step-by-step reasoning before answering. Slower than a standard model, but much better at math, code, and tricky logic.</p>
+<p><strong>Red teaming.</strong> Deliberately attacking your own AI system to find its weaknesses: jailbreaks, prompt injections, bad outputs. You want to find the holes before real attackers do.</p>
 <p><strong>Regression gate.</strong> An automated check that fails when a new model version performs worse than the committed baseline on evals.</p>
+<p><strong>Rubric.</strong> A scoring guide that tells an evaluator what good looks like: the criteria, the point values, and examples. Clear rubrics make eval scores fair and repeatable.</p>
 
 <h2>S</h2>
+<p><strong>Sampling.</strong> The method used to pick each token during decoding, steered by settings like temperature and top-p. Change the sampling, and you change the personality of the output.</p>
+<p><strong>Sandboxing.</strong> Running code or tools in an isolated environment where they cannot touch your real system. The agent can experiment freely, and mistakes stay in the box.</p>
+<p><strong>Semantic search.</strong> Searching by meaning instead of exact words. It finds the right answer even when your query uses different wording than the documents.</p>
+<p><strong>Side chat.</strong> A separate conversation with its own context, kept apart from the main chat. Useful for focused work on one topic without cluttering your main thread.</p>
 <p><strong>Skill.</strong> A packaged, reusable procedure an agent can invoke, such as a report template or a debugging checklist.</p>
+<p><strong>Standing instruction.</strong> A rule that applies to every session, not just one conversation, like always asking before sending email. Set it once, and it holds.</p>
+<p><strong>Stdio server.</strong> A program that talks to other programs by reading and writing plain text through standard input and output. Many MCP servers work this way: simple pipes, no network needed.</p>
+<p><strong>Step budget.</strong> The maximum number of steps an agent is allowed before it must stop. It keeps a confused agent from looping forever.</p>
+<p><strong>Subagent.</strong> A helper agent spawned by a main agent to handle one specific subtask, then report back. The subagent does the work; the main agent makes the decisions.</p>
+<p><strong>Synthetic data.</strong> Data generated by a program or another model for training or testing. Cheap and plentiful, but it can carry the generator's biases, so mix in real data.</p>
 <p><strong>System prompt.</strong> The standing instruction a model sees before the conversation, defining its role, rules, and boundaries.</p>
 
 <h2>T</h2>
 <p><strong>Temperature.</strong> A setting controlling randomness in model output. Low values are deterministic and reliable; high values are creative and unpredictable.</p>
 <p><strong>Token.</strong> The chunk of text a model reads and writes. Pricing, context limits, and speed are all measured in tokens.</p>
 <p><strong>Tool (agent).</strong> A function an agent can call to act in the world: search, query a database, send a message. Described by name, purpose, and parameters.</p>
+<p><strong>Tool call.</strong> The actual moment an agent invokes a tool: it picks a function, fills in the arguments, and runs it. If agents are brains, tool calls are their hands.</p>
+<p><strong>Tool schema.</strong> The formal description of a tool: its name, what it does, and what arguments it accepts. This is what the model reads when deciding which tool to use.</p>
+<p><strong>Top-p.</strong> A decoding setting that limits the model to picking from the smallest set of tokens that add up to probability p. Lower top-p is more focused; higher is more varied. Often tuned alongside temperature.</p>
+<p><strong>Trace.</strong> A record of everything an agent did during a run: its plans, tool calls, and results, in order. When something breaks, the trace is where you debug.</p>
+
+<h2>V</h2>
+<p><strong>Vector database.</strong> A database built to store and search embeddings quickly. It is the engine behind semantic search and most RAG systems.</p>
+
+<h2>W</h2>
+<p><strong>Weights.</strong> Another name for a model's parameters: the tuned numbers that hold what it learned. Downloading a model's weights means getting the model itself.</p>
+
+<h2>Z</h2>
+<p><strong>Zero-shot.</strong> Asking a model to do a task with no examples, instructions only. Works well for simple tasks; for tricky ones, show it a few examples instead.</p>
 
 <footer>
 <p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>

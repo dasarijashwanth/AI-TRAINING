@@ -30,7 +30,18 @@
 <h1>Guides</h1>
 <p>Three practical how-tos for the decisions that come up in every AI project: which model to pick, how to keep costs under control, and how to run your first eval.</p>
 
-<h2>Guide 1: Pick a model</h2>
+<nav>
+<p><strong>On this page</strong></p>
+<ul>
+<li><a href="#guide-1-pick-a-model">Guide 1: Pick a model</a></li>
+<li><a href="#guide-2-control-costs">Guide 2: Control costs</a></li>
+<li><a href="#guide-3-run-your-first-eval">Guide 3: Run your first eval</a></li>
+<li><a href="#keep-these-three-together">Keep these three together</a></li>
+<li><a href="#run-a-workshop">Run a workshop</a></li>
+</ul>
+</nav>
+
+<h2 id="guide-1-pick-a-model">Guide 1: Pick a model</h2>
 <p>Do not start with the biggest model. Start with the cheapest one that might work, and upgrade only when measurements say so.</p>
 <ol>
 <li><strong>Classify the task.</strong> Is it creative writing, factual extraction, reasoning, or code? Different models have different strengths, and the provider's model card usually says which.</li>
@@ -41,7 +52,7 @@
 <p>A ticket-classification task: the small model hits 92% accuracy at $0.02 per thousand tickets, the large hits 95% at $0.40. You ship the small model and route only low-confidence tickets to the large one. Blended accuracy lands near 94% at a fraction of the cost. That routing pattern is the whole game.</p>
 </div>
 
-<h2>Guide 2: Control costs</h2>
+<h2 id="guide-2-control-costs">Guide 2: Control costs</h2>
 <p>AI bills surprise people because every token counts and agents multiply tokens. Five controls:</p>
 <ol>
 <li><strong>Shorten prompts.</strong> Cut system prompts to what the model actually uses. Every token in the prompt is paid on every call.</li>
@@ -54,7 +65,7 @@
 <p>Cost per completed task. Not cost per token, not cost per call. If a support ticket costs $0.003 to resolve with AI versus $4 with a human, the business case is obvious and you can defend every other number from it.</p>
 </div>
 
-<h2>Guide 3: Run your first eval</h2>
+<h2 id="guide-3-run-your-first-eval">Guide 3: Run your first eval</h2>
 <p>An eval is a test suite for AI behavior. Here is the minimum viable version, doable in an afternoon:</p>
 <ol>
 <li><strong>Collect 10 to 30 real examples.</strong> Real user questions, real tickets, real tasks. Not examples you invented; the messier the better.</li>
@@ -67,8 +78,26 @@
 <p>You run 20 support tickets through your agent: 17 correct answers, 3 wrong, cost $0.05 total. Baseline: 85% at $0.0025 per ticket. You add a confidence gate that escalates uncertain tickets: now 19 correct-or-escalated, cost $0.06. The eval tells you the gate was worth it, in numbers you can show anyone.</p>
 </div>
 
-<h2>Keep these three together</h2>
+<h2 id="keep-these-three-together">Keep these three together</h2>
 <p>Model selection, cost control, and evals are one practice, not three. The eval tells you which model is good enough, the cost tracking tells you which one is affordable, and the routing pattern from Guide 1 is how you get both. Revisit all three monthly; models, prices, and your tasks all change.</p>
+
+<h2 id="run-a-workshop">Run a workshop</h2>
+<p>Reading about AI agents makes you curious. Building one in a room full of other people makes you capable. A well-run hands-on workshop moves a team from "I have heard of these tools" to "I shipped something today" in a single afternoon, and it is the best way to spread what you have learned in these lessons to your team or community.</p>
+<p><strong>Set one concrete outcome.</strong> Not "learn about AI" but "every attendee leaves with a working agent that drafts weekly status reports" or "every attendee has built and evaluated a prompt for their real job". One outcome keeps you honest about what to cut.</p>
+<p><strong>Use 90-minute blocks, twice.</strong> Attention collapses after about an hour of new material. A format that works: 20 minutes of live demo (you driving, everyone watching), 40 minutes of hands-on exercises in pairs, 20 minutes of share-back, 10 minutes of buffer. Then a break, then repeat with a harder exercise. Two 90-minute sessions with a 15-minute break in between beat one 3-hour session every time.</p>
+<p><strong>Exercises beat slides.</strong> Keep slides under 10. Each exercise should fit on one handout page: the goal, the starting prompt or code, and three checkpoints ("you know you are done when..."). People get stuck on setup, not on concepts, so verify accounts, API keys, and Wi-Fi before anyone arrives, and keep a printed one-page setup sheet as backup.</p>
+<p><strong>Plan for the usual pitfalls.</strong> Half the room will work faster than you explain and hit the next error first; keep a shared doc where you paste fixes as they come up. Some people will arrive without accounts ready, so keep a demo account they can share. And the demo gods fail at the worst moment, so record your demo the night before and play the recording if the live version breaks.</p>
+<p><strong>Materials to prepare:</strong> a one-page agenda, the exercise handouts, a starter project everyone can copy, your eval template from Guide 3, and a feedback form with two questions: what will you use this week, and what confused you.</p>
+<div class="example"><div class="label">Example agenda: a 3-hour AI agents workshop</div>
+<p><strong>0:00 to 0:10.</strong> Welcome, one goal for the day, quick poll: who has used an AI agent this week?</p>
+<p><strong>0:10 to 0:30.</strong> Live demo: build a small research agent that turns a topic into bullet-point notes.</p>
+<p><strong>0:30 to 1:10.</strong> Exercise 1, in pairs: adapt the agent to your own job. Checkpoints: it runs, it handles one edge case, and you have measured the cost per run.</p>
+<p><strong>1:10 to 1:25.</strong> Break.</p>
+<p><strong>1:25 to 1:45.</strong> Mini-lesson: the safety checklist from the safety lessons, and cost-per-task thinking from Guide 2.</p>
+<p><strong>1:45 to 2:25.</strong> Exercise 2: write a 10-example eval for your agent (straight from Guide 3) and run it.</p>
+<p><strong>2:25 to 2:45.</strong> Share-back: each pair shows one thing that worked and one surprise.</p>
+<p><strong>2:45 to 3:00.</strong> Feedback forms, links to these lessons, and a group photo.</p>
+</div>
 
 <footer>
 <p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
