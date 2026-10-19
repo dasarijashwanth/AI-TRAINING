@@ -1,77 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using AI Agents | AI Training by Jashwanth Dasari</title>
 <link rel="stylesheet" href="/AI-TRAINING/css/style.css">
 </head>
 <body>
-<div class="layout">
 <aside class="sidebar">
-  <div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
-  <div class="tagline">by Jashwanth Dasari</div>
-  <nav>
-    <a href="/AI-TRAINING/">Home</a>
-    <div class="section">Learn</div>
-    <a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
-    <a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
-    <a href="/AI-TRAINING/topics/using-agents.html" class="active">3. Using AI Agents</a>
-    <a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
-    <a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
-    <a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
-    <div class="section">Reference</div>
-    <a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
-    <a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
-    <a href="/AI-TRAINING/topics/about.html">9. About</a>
-  </nav>
+<div class="brand"><a href="/AI-TRAINING/">AI Training</a></div>
+<div class="tagline">by Jashwanth Dasari</div>
+<nav>
+<a href="/AI-TRAINING/">Home</a>
+<div class="nav-section">Learn</div>
+<a href="/AI-TRAINING/topics/concepts.html">1. AI Concepts</a>
+<a href="/AI-TRAINING/topics/safety.html">2. AI Safety</a>
+<a href="/AI-TRAINING/topics/using-agents.html" class="active">3. Using AI Agents</a>
+<a href="/AI-TRAINING/topics/coding-with-agents.html">4. Coding with AI Agents</a>
+<a href="/AI-TRAINING/topics/customizing-agents.html">5. Customizing Agents</a>
+<a href="/AI-TRAINING/topics/building-agents.html">6. Building Agents</a>
+<div class="nav-section">Reference</div>
+<a href="/AI-TRAINING/topics/guides.html">7. Guides</a>
+<a href="/AI-TRAINING/topics/glossary.html">8. Glossary</a>
+<a href="/AI-TRAINING/topics/topic-map.html">9. Topic Map</a>
+<a href="/AI-TRAINING/topics/competency-map.html">10. Competency Map</a>
+<a href="/AI-TRAINING/topics/about.html">11. About</a>
+</nav>
 </aside>
 <main class="content">
 <h1>Using AI Agents</h1>
-<p>A chatbot answers one question. An agent works toward a goal: it plans steps, uses tools, reads the results, and adjusts. This page is about using agents well, as a user, before you ever build one.</p>
+<p>Most people meet AI through a chat box and stop there. That is like owning a phone and only using it as a clock. AI agents can find information, draft your text, plan your week, and do multi-step tasks while you do something else. This module teaches you how to use them well: when to chat, when to delegate, and how to keep the human steps where they belong. Every lesson ends with something you can try today.</p>
+<h2>On this page</h2>
+<ul>
+<li><a href="#finding-information-with-an-assistant">Finding information with an assistant</a></li>
+<li><a href="#working-from-your-own-files-and-images">Working from your own files and images</a></li>
+<li><a href="#thinking-a-problem-through-with-an-assistant">Thinking a problem through with an assistant</a></li>
+<li><a href="#drafting-a-text-and-asking-for-critique">Drafting a text and asking for critique</a></li>
+<li><a href="#delegating-a-task-to-an-agent">Delegating a task to an agent</a></li>
+<li><a href="#how-much-the-agent-may-do-before-it-asks">How much the agent may do before it asks</a></li>
+<li><a href="#changing-the-brief-while-the-agent-works">Changing the brief while the agent works</a></li>
+<li><a href="#breaking-a-task-into-pieces-an-agent-can-finish">Breaking a task into pieces an agent can finish</a></li>
+<li><a href="#delegating-in-rounds">Delegating in rounds</a></li>
+<li><a href="#when-to-stop-delegating-and-do-it-yourself">When to stop delegating and do it yourself</a></li>
+<li><a href="#chat-agent-or-automation">Chat, agent or automation</a></li>
+<li><a href="#trying-two-models-on-the-same-task">Trying two models on the same task</a></li>
+<li><a href="#the-steps-that-stay-human">The steps that stay human</a></li>
+<li><a href="#reasoning-across-tool-levels">Reasoning across tool levels</a></li>
+</ul>
 
-<h2>What makes it an agent</h2>
-<p>Three ingredients turn a model into an agent:</p>
-<ol>
-<li><strong>A goal</strong>, not just a question. "Book me the cheapest flight" instead of "what are flight prices."</li>
-<li><strong>Tools</strong> it can call: web search, a calendar, a code runner, a database.</li>
-<li><strong>A loop</strong>: think, act, observe the result, repeat until the goal is done or it gets stuck.</li>
-</ol>
-<p>If the system cannot take actions and see what happened, it is a chatbot with extra steps, not an agent.</p>
+<h2 id="finding-information-with-an-assistant">Finding information with an assistant</h2>
+<p>An AI assistant is the fastest research partner you have ever had. Instead of opening ten tabs and skimming, you ask a question and get a synthesized answer in seconds. The trick is asking like you would brief a smart intern: give context, say what the answer is for, and ask it to show its reasoning when the stakes matter. A vague question gets a vague answer. A specific one gets something you can actually use.</p>
+<p>Always check important facts. The assistant can be confidently wrong about dates, numbers, and niche details. Treat its answer as a strong first draft of the truth, not the final word. For low-stakes questions, speed wins. For anything that goes into a report, a client email, or a decision, verify the key claims.</p>
+<div class="example"><div class="label">Example</div><p>You need to pick a project management tool for a 6-person team. Instead of reading ten review sites, you ask: "Compare Notion, Asana, and ClickUp for a 6-person remote team that ships weekly. We care about simple onboarding and calendar sync. Give me a short table with pros, cons, and pricing." You get a comparison in 30 seconds, then you verify the pricing on the vendor sites before deciding.</p></div>
+<div class="tip"><p>Tip: end research questions with "list the main assumptions you made" to see where the answer might be shaky.</p></div>
 
-<h2>When agents are worth it</h2>
-<p>Agents shine on multi-step tasks where the steps depend on each other: researching a topic across sources, triaging a support inbox, or refactoring code across files. They are overkill for single questions. "Summarize this paragraph" does not need an agent; it needs one model call.</p>
-<div class="tip"><div class="label">Decision rule</div>
-<p>If you can write down the exact steps in advance, write a script. If the steps depend on what you find along the way, use an agent. If it is one question, just ask the model.</p>
-</div>
+<h2 id="working-from-your-own-files-and-images">Working from your own files and images</h2>
+<p>AI gets far more useful when you feed it your own material. Upload a spreadsheet and ask for the trends. Drop in a screenshot of an error message and ask what it means. Paste your meeting notes and ask for the action items. The assistant stops guessing and starts working with your actual data.</p>
+<p>This works for documents, PDFs, images, and even photos of whiteboards. Before you upload anything, pause for two seconds: does this file contain passwords, private customer data, or anything you would not email to a stranger? If yes, strip it out first. Your own salary slip and your company's client list do not belong in a chat box without thinking.</p>
+<div class="example"><div class="label">Example</div><p>You take a photo of a whiteboard covered in brainstorming from a team meeting. You upload it and ask: "Turn this into a clean list of the 8 ideas, grouped into quick wins and long-term bets." The messy handwriting becomes a structured list you can paste straight into your project doc.</p></div>
 
-<h2>Prompting patterns that work</h2>
-<p>Agents respond to structure. Four patterns cover most use:</p>
+<h2 id="thinking-a-problem-through-with-an-assistant">Thinking a problem through with an assistant</h2>
+<p>The assistant is not just an answer machine. It is a thinking partner that never gets tired of your questions. When a problem is fuzzy, talk it through: lay out what you know, what you are unsure about, and what you have tried. Ask it to poke holes in your plan or to argue the opposite side. This is where AI earns its keep for knowledge workers.</p>
+<p>The magic is in the back and forth. Your first message will not be your best thinking, and that is fine. Answer its follow-up questions honestly, even the ones that feel basic. Often the breakthrough comes in round three, when you have clarified your own thinking enough to ask the real question.</p>
+<div class="example"><div class="label">Example</div><p>You are deciding whether to switch your team to a 4-day week. You tell the assistant the team size, the workload, and your worries. It asks what success would look like after 3 months. You answer. Then it lays out the three biggest risks for your specific situation and suggests a 6-week trial design. You just planned a pilot in ten minutes of conversation.</p></div>
+<div class="tip"><p>Tip: ask "what am I not considering?" at least once per hard problem. It is the highest-value question in this whole module.</p></div>
 
-<h3>1. Give the goal, the constraints, and the finish line</h3>
-<div class="example"><div class="label">Example</div>
-<p>Weak: "Research EV pricing." Strong: "Goal: compare total cost of ownership for three EVs under $40k. Constraints: US pricing, 2026 models, include insurance estimates. Finish when you have a table with all three and a one-paragraph recommendation." The agent now knows what done looks like.</p>
-</div>
+<h2 id="drafting-a-text-and-asking-for-critique">Drafting a text and asking for critique</h2>
+<p>Blank pages are expensive. An assistant can draft your email, report, proposal, or post in seconds, and you spend your energy editing instead of staring. Give it the audience, the goal, the tone, and the key points. A good brief makes a good draft. "Write an email to the client" is a bad brief. "Write a 5-sentence email to our client Maya: thank her for the feedback, say the revised timeline is Friday, and ask her to confirm the budget line" is a good one.</p>
+<p>Then comes the part people skip: ask for critique, not just polish. Ask "what is weak about this draft?" or "what would a skeptical reader object to?" The assistant will happily rewrite, but its real value is telling you what is missing before your audience does.</p>
+<div class="example"><div class="label">Example</div><p>You draft a project proposal with the assistant, then paste your own final version back and ask: "Pretend you are the client reading this. What are your top 3 concerns?" It flags that you never mention what happens if the deadline slips. You add one paragraph. That paragraph saves you an awkward call next week.</p></div>
 
-<h3>2. Show, do not just tell</h3>
-<p>One short example of the output format beats three paragraphs of description. "Format the result exactly like this: ..." followed by a two-line sample.</p>
+<h2 id="delegating-a-task-to-an-agent">Delegating a task to an agent</h2>
+<p>Chat gives you answers. Agents do work. An agent can plan the steps, use tools, read files, run searches, and come back with a finished result. Delegating to one feels like briefing a freelancer: you describe the outcome you want, give the constraints, and let it figure out the how.</p>
+<p>The brief matters more than anything. State the goal in one sentence, list what success looks like, mention the constraints (deadline, budget, tools it can use), and say how it should report back. New delegators make two mistakes: briefing too vaguely ("look into marketing") and briefing too rigidly (listing every step, which defeats the point of an agent).</p>
+<div class="example"><div class="label">Example</div><p>You delegate: "Find 5 venues in Miami for a 40-person team offsite in March. Budget under $3,000 for the day. We need parking and a projector. Give me a table with name, price, capacity, and one line on why each fits." The agent searches, compares, and returns the table. You review and pick. The two hours of Googling never happened.</p></div>
 
-<h3>3. Break big goals into checkpoints</h3>
-<p>"First find the three candidates and stop. I will pick one before you continue." Checkpoints keep long agent runs from drifting, and they let you correct course cheaply.</p>
+<h2 id="how-much-the-agent-may-do-before-it-asks">How much the agent may do before it asks</h2>
+<p>Every delegation needs a leash: how far can the agent go before it must check back with you? For safe, reversible work like research or drafting, give it a long leash. For anything that spends money, contacts people, deletes things, or commits you publicly, keep the leash short. This is not paranoia. It is the same judgment you use with a new hire.</p>
+<p>State the boundary in the brief itself: "research freely, but do not send anything or spend anything without my approval." Most agent tools let you set approval rules for sensitive actions. Use them. The cost of one accidental email to a client is higher than the cost of approving ten harmless ones.</p>
+<div class="example"><div class="label">Example</div><p>You ask an agent to gather quotes from three suppliers. You say: "Email each supplier for a quote, but show me every draft before you send it." The agent prepares the three emails and waits. You fix the tone in one of them, approve, and it sends. Nothing leaves your outbox without your eyes on it.</p></div>
+<div class="tip"><p>Tip: a good default rule is that the agent may read and draft anything, but only a human sends, spends, or deletes.</p></div>
 
-<h3>4. Tell it what to do when stuck</h3>
-<p>"If a source is paywalled, skip it and note that you skipped it. If two sources conflict, report both. Never invent a number." Agents guess when they lack instructions for failure. Write the failure instructions.</p>
+<h2 id="changing-the-brief-while-the-agent-works">Changing the brief while the agent works</h2>
+<p>Plans change mid-task. Maybe the agent found something unexpected, or you realized the brief missed the point. You can redirect the agent the same way you would redirect a colleague: acknowledge what it has done, explain what changed, and give the new direction. You do not need to start over. Good agents carry the context forward.</p>
+<p>The key skill is judging whether the change is a small course correction or a whole new task. Tweaking the criteria is a correction. Switching the goal entirely is a new task, and it deserves a fresh brief so the old instructions do not pollute the new work.</p>
+<div class="example"><div class="label">Example</div><p>The agent is comparing 5 venues when you learn the offsite grew to 60 people. You say: "Update: headcount is now 60, not 40. Keep the 5 venues you found, mark which ones still fit, and add 3 more that fit 60." The agent adjusts instead of restarting, and your earlier work is not wasted.</p></div>
 
-<h2>Supervising an agent</h2>
-<p>Think of the agent as a fast intern, not an oracle. Skim its intermediate steps, not just the final answer. The moment you see it going down a wrong path, stop it and redirect; a correction at step 2 saves twenty wasted steps. And keep the safety habits from the <a href="/AI-TRAINING/topics/safety.html">AI Safety</a> page: approve irreversible actions yourself, and check anything that will be sent to another human.</p>
+<h2 id="breaking-a-task-into-pieces-an-agent-can-finish">Breaking a task into pieces an agent can finish</h2>
+<p>Agents are great at focused tasks and shaky at giant ones. "Plan our product launch" will get you a generic mess. "Draft the launch email, then list 10 launch-day checklist items, then summarize competitor launch posts from this month" will get you three solid pieces. The difference is decomposition: turning one big fuzzy goal into small tasks with clear done criteria.</p>
+<p>A piece is small enough when you can describe its finished state in one sentence. "A spreadsheet of 20 prospects with name, company, and email" is finishable. "Research the market" is not. If you cannot picture what the completed output looks like, the piece is still too big. Split it again.</p>
+<div class="example"><div class="label">Example</div><p>Instead of "prepare the quarterly review," you break it down: (1) pull the sales numbers from the spreadsheet into a summary table, (2) draft 5 bullet points on what went well, (3) list 3 risks for next quarter with one sentence each. You delegate all three to the agent in parallel, then assemble the final review yourself in 15 minutes.</p></div>
 
-<h2>Try it today</h2>
-<p>Pick one real multi-step task from your week, something like "find three options for X and compare them." Write the goal, constraints, and finish line as above, add one checkpoint, and run it. Compare the result to doing it yourself. You will learn more from one real run than from ten articles about agents.</p>
+<h2 id="delegating-in-rounds">Delegating in rounds</h2>
+<p>Big work gets better when you delegate in rounds instead of one shot. Round one: the agent produces a rough version. You review and give feedback. Round two: it refines. This loop beats any single perfect brief, because your standards become clear through examples, not descriptions. Nobody writes a perfect brief on the first try, and nobody needs to.</p>
+<p>Keep rounds tight. Review quickly, give specific feedback ("this section is too long, cut it in half" beats "make it better"), and set a round limit so you do not polish forever. Two or three rounds is the sweet spot for most tasks. If round four still is not right, the brief was wrong, not the agent.</p>
+<div class="example"><div class="label">Example</div><p>You need a training outline. Round one: the agent drafts a rough 10-module outline. You mark modules 3 and 7 as irrelevant and say module 5 needs a hands-on exercise. Round two: it returns a revised 8-module outline with exercises. Two rounds, twenty minutes total, and the outline is ready to share.</p></div>
 
-<footer>
-<p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
-</footer>
+<h2 id="when-to-stop-delegating-and-do-it-yourself">When to stop delegating and do it yourself</h2>
+<p>Delegation has a point of diminishing returns, and recognizing it is a skill. Stop delegating when you have explained the same thing three times and it still comes back wrong. Stop when the review takes longer than doing it yourself would. Stop when the task needs your judgment, your relationships, or your taste, the things no brief can transfer.</p>
+<p>This is not failure. Knowing when to take the wheel back is part of being good at delegation. Sometimes the fastest path is to let the agent do the 80 percent it is good at, then finish the last 20 percent yourself. Hybrid beats pure in both directions.</p>
+<div class="example"><div class="label">Example</div><p>You ask an agent to write a difficult email to a frustrated client. After two rounds it still sounds robotic and misses the nuance of your relationship. You stop, take its best draft as raw material, and rewrite it yourself in ten minutes. The draft was not wasted. It gave you the structure and the facts, and you added the human part.</p></div>
+<div class="tip"><p>Tip: if you are on round four of corrections, pause and ask whether the task needs your hands, not better instructions.</p></div>
+
+<h2 id="chat-agent-or-automation">Chat, agent or automation</h2>
+<p>Not every job needs an agent. You have three tools, and picking the right one saves time. Chat is for quick questions, drafts, and thinking together. An agent is for multi-step tasks that need tools and judgment along the way. Automation is for work that repeats on a schedule with the same steps every time.</p>
+<p>Match the tool to the shape of the work. If you will ask once and move on, chat. If the task has steps you could hand to an intern, delegate to an agent. If you find yourself doing the exact same thing every Monday morning, automate it. Over-engineering a one-off into an automation wastes more time than it saves.</p>
+<div class="example"><div class="label">Example</div><p>Every Friday you spend 30 minutes compiling a status update from three spreadsheets. That is automation territory: same steps, same inputs, weekly. But deciding which client to prioritize next quarter is a thinking task: chat with the assistant about it. And researching those clients? Delegate that to an agent. Three tools, three jobs, zero confusion.</p></div>
+
+<h2 id="trying-two-models-on-the-same-task">Trying two models on the same task</h2>
+<p>Different AI models have different strengths, like colleagues with different specialties. One may write better, another may reason better, a third may be faster and cheaper. For important work, run the same task on two models and compare. You will be surprised how often they disagree, and the disagreement itself is informative.</p>
+<p>Do not do this for everything. It doubles your review time. Reserve it for high-stakes outputs: the proposal that wins or loses the deal, the analysis behind a big decision, the message that cannot be unsent. For routine work, your default model is fine.</p>
+<div class="example"><div class="label">Example</div><p>You are writing a pricing proposal for your biggest client. You ask two models to draft it and to critique each other's drafts. Model A is more aggressive on pricing, Model B adds a risk section you had not thought of. You combine the best of both into a final version that is stronger than either draft alone.</p></div>
+
+<h2 id="the-steps-that-stay-human">The steps that stay human</h2>
+<p>Some steps should never be delegated, no matter how capable the agent is. The final yes on anything that affects people: hiring, firing, pricing for a real client, medical or legal judgment. Anything where your reputation is on the line: your name on a post, your voice in a negotiation. And anything where the process is the point: learning a skill, building a relationship, forming your own opinion.</p>
+<p>A useful test: if you would be embarrassed explaining "the AI decided" to the person affected, keep that step yourself. Delegation is about leverage, not abdication. The agent does the legwork. You make the calls.</p>
+<div class="example"><div class="label">Example</div><p>You let an agent draft your performance reviews, research salary benchmarks, and summarize each team member's project history. But the rating and the feedback conversation stay 100 percent yours. Your team deserves to hear your judgment, not a generated paragraph. The agent saved you three hours of prep. The human part took twenty minutes and mattered most.</p></div>
+
+<h2 id="reasoning-across-tool-levels">Reasoning across tool levels</h2>
+<p>As you get comfortable, you will start combining levels: the chat helps you think, the agent does the research, the automation runs the weekly report, and you review it all. Reasoning across tool levels means seeing your whole workflow and placing each piece where it performs best. The goal is not to use AI everywhere. It is to build a system where each step, human or machine, does what it does best.</p>
+<p>Start by mapping one real workflow end to end. Write down the steps, then label each one: chat, agent, automation, or human. You will usually find that only half the steps need AI at all, and that is fine. A calm, well-placed system beats an impressive, fragile one every time.</p>
+<div class="example"><div class="label">Example</div><p>Your weekly newsletter workflow: an automation pulls trending topics every Monday morning, you chat with the assistant to pick the angle, an agent drafts the post from your notes, and you do the final edit and hit publish. Four levels, one workflow, and the whole thing takes you 30 minutes instead of 3 hours.</p></div>
+<div class="tip"><p>Tip: draw your workflow on paper first. If you cannot explain it in one sentence, simplify before adding AI to it.</p></div>
 </main>
-</div>
+<footer><p>By <a href="https://github.com/dasarijashwanth">Jashwanth Dasari</a>. Newsletter: <a href="https://learnwithjashwanth.substack.com">Learn with Jashwanth</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p></footer>
 </body>
 </html>
